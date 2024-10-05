@@ -1,9 +1,10 @@
 "use client";
 import { Card, CardContent } from "@/components/ui/card";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Chat from "./chat";
 import UserBar from "./userBar";
 import { Separator } from "@/components/ui/separator";
+import { ws } from "@/app/ws";
 
 import { MessageStatus, User } from "./types";
 const users = [
@@ -60,6 +61,11 @@ export default function Page() {
   const onUserChange = (newUser: User) => {
     setSelectedUser(newUser);
   };
+  useEffect(() => {
+    ws.on("connect", () => {
+      console.log("here");
+    });
+  });
   return (
     <div className="flex items-center justify-center h-full">
       <Card className="h-5/6 w-5/6">

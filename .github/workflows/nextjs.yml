@@ -27,6 +27,9 @@ concurrency:
 jobs:
   # Build job
   build:
+    defaults:
+      run:
+        working-directory: ./frontend
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
