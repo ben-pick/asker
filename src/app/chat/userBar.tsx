@@ -44,7 +44,7 @@ export default function UserBar(props: {
                 </div>
               </TooltipTrigger>
               {tooltip && (
-                <TooltipContent>
+                <TooltipContent className="bg-violet-400">
                   <p>{tooltip}</p>
                 </TooltipContent>
               )}
