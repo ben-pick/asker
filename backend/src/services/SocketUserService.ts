@@ -1,5 +1,5 @@
 import { Server } from "socket.io";
-import SocketUser from "../interfaces/SocketUser";
+import SocketUser from "../../../shared/interfaces/SocketUser";
 import TokenUser from "../interfaces/TokenUser";
 import UserService from "./UserService";
 class SocketUserService {

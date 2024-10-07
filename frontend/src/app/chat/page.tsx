@@ -6,8 +6,8 @@ import UserBar from "./userBar";
 import { Separator } from "@/components/ui/separator";
 import { socket } from "@/app/ws";
 import { useRouter } from "next/navigation";
-
-import { MessageStatus, User, UserStatus } from "./types";
+import { SocketUser, User } from "../../../../shared";
+import { MessageStatus, UserStatus } from "./types";
 import useSocket from "@/hooks/use-socket";
 const users = [
   {
@@ -59,7 +59,7 @@ userToMessages.set(2, [
 
 export default function Page() {
   const router = useRouter();
-  const { data, isConnected } = useSocket(socket, "users");
+  const { data, isConnected } = useSocket<SocketUser>(socket, "users");
   const [selectedUser, setSelectedUser] = useState(users[0]);
   const currMessages = userToMessages.get(selectedUser.id);
   const onUserChange = (newUser: User) => {

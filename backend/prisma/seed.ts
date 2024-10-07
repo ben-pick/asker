@@ -1,20 +1,7 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../../shared";
 const prisma = new PrismaClient();
 async function main() {
-  const alice = await prisma.user.upsert({
-    where: {
-      email: "test@email.com",
-    },
-    update: {},
-    create: {
-      email: "test@email.com",
-      firstName: "Alice",
-      lastName: "Pebble",
-      icon: "https://picsum.photos/60/60",
-      isNew: true,
-      isTeacher: false,
-    },
-  });
+  await prisma.user.deleteMany()
   const bob = await prisma.user.upsert({
     where: {
       email: "test2@email.com",
@@ -27,6 +14,23 @@ async function main() {
       icon: "https://picsum.photos/60/60",
       isNew: false,
       isTeacher: true,
+      students: {
+        connectOrCreate: {
+          where: {
+            email: "test@email.com"
+          },
+          create: {
+            email: "test@email.com",
+            firstName: "Alice",
+            lastName: "Pebble",
+            icon: "https://picsum.photos/60/60",
+            isNew: true,
+            isTeacher: false,
+          }
+        }
+      }
+    }, include: {
+      students: true
     },
   });
 }

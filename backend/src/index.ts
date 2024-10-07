@@ -4,6 +4,8 @@ import { Server } from "socket.io";
 import userRouter from "./routes/rest/userRoutes";
 import socketUserRouter from "./routes/websocket/userRoutes";
 import validateToken from "./middleware/websocket/auth";
+import dotenv from 'dotenv'
+dotenv.config()
 const app = express();
 
 const server = http.createServer(app);
@@ -18,7 +20,7 @@ const io = new Server(server, {
   },
 });
 server.listen(process.env.PORT, () => {
-  console.log("listening on *:4200");
+  console.log("listening on *:" + process.env.PORT);
 });
 app.use(function(req, res, next){
   console.log('%s %s', req.method, req.url);

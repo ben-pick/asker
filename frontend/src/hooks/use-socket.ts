@@ -12,7 +12,6 @@ export default function useSocket<T>(socket: Socket, topic: string) {
         });
         client.on("disconnect", () => setConnected(false));
         client.on(topic, (val) => {
-            console.log(val)
             setData(val as T)
         })
         return () => {

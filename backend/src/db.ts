@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../../shared";
 const prisma = new PrismaClient();
 
 export default prisma;

@@ -1,8 +1,8 @@
-import { User,  } from "@prisma/client";
 import { NewUser } from "../schemas/NewUser";
 import UserCredentials from "../interfaces/UserCredentials";
 import prisma from "../db";
 import TokenUser from "../interfaces/TokenUser";
+import { User } from "../../../shared";
 class UserService {
 
   async register(newUser: NewUser): Promise<User | null> {

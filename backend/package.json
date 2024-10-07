@@ -39,7 +39,10 @@
     "socket.io": "^4.8.0",
     "yup": "^1.4.0"
   },
-  "@snaplet/seed": {
-    "config": "prisma/seed/seed.config.ts"
-  }
+  "references": [
+      { 
+        "path": "../shared",
+        "prepend": true
+      }
+  ]
 }
