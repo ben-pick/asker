@@ -21,12 +21,12 @@ export default function UserBar(props: {
           user.isNew && user != props.selectedUser ? "animate-pulse" : "";
         const hoverAnimation =
           !pulsingAnimation && user != props.selectedUser
-            ? "transition ease-in-out hover:bg-stone-100"
+            ? "transition ease-in-out hover:bg-muted"
             : "";
         const colour = user.isNew
           ? "bg-violet-400"
           : user == props.selectedUser
-          ? "bg-stone-200"
+          ? "bg-muted"
           : "";
         const tooltip = user.isNew ? "Student needs help" : "";
         return (

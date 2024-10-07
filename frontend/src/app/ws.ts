@@ -1,5 +1,8 @@
 import io from "socket.io-client";
 
-const ws = io("localhost:4200");
+const socket = io(process.env.backend_host, {
+  withCredentials: true,
+  autoConnect: false
+})
 
-export { ws };
+export { socket };

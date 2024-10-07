@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { GeistSans } from 'geist/font/sans';
-import { GeistMono } from 'geist/font/mono';
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
+import { Toaster } from "@/components/ui/toaster";
 
 import "./globals.css";
-
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,8 +17,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
-      <body className="h-screen">{children}</body>
+      <body className="h-screen">
+        <main className="h-screen">{children}</main>
+        <Toaster />
+      </body>
     </html>
-  )
+  );
 }
-

@@ -1,7 +1,9 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import http from "http";
 import { Server } from "socket.io";
-import { SocketUser } from "./users/socketUser.interface";
+import userRouter from "./routes/rest/userRoutes";
+import socketUserRouter from "./routes/websocket/userRoutes";
+import validateToken from "./middleware/websocket/auth";
 const app = express();
 
 const server = http.createServer(app);
@@ -11,18 +13,27 @@ const server = http.createServer(app);
 // });
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: process.env.FRONTEND_HOST,
+    credentials: true
   },
 });
-const socketUsers: SocketUser[] = [];
-server.listen(4200, () => {
+server.listen(process.env.PORT, () => {
   console.log("listening on *:4200");
 });
-
-io.on("connection", (socket) => {
-  for (let [id, s] of io.of("/").sockets) {
-    socketUsers.push({
-      id: id,
-    });
-  }
+app.use(function(req, res, next){
+  console.log('%s %s', req.method, req.url);
+  next();
 });
+
+app.use(userRouter);
+io.on("connection", async (socket) => {
+  await socketUserRouter(socket, io);
+  
+});
+
+io.use((socket, next) => {
+  validateToken(socket, next)
+})
+
+
+

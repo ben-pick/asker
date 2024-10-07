@@ -13,7 +13,26 @@ const config: Config = {
 			sans: ['var(--font-geist-sans)'],
 			mono: ['var(--font-geist-mono)'],
 		},
-
+		keyframes: {
+			appear: {
+			  "0%": {
+				opacity: "0",
+			  },
+			  "10%": {
+				opacity: "1",
+			  },
+			  "90%": {
+				opacity: "1",
+			  },
+			  "100%": {
+				opacity: "0",
+			  },
+		   },
+		 },
+		
+		animation: {
+			appear: "appear 0.5s ease-in-out forwards",
+		},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',

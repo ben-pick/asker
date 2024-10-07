@@ -26,7 +26,7 @@ export default function MessageBubble(props: Message) {
   const placement =
     props.status == MessageStatus.RECEIVED ? "justify-start" : "justify-end";
   const bubbleColour =
-    props.status == MessageStatus.RECEIVED ? "bg-violet-600" : "bg-stone-300";
+    props.status == MessageStatus.RECEIVED ? "bg-primary" : "bg-muted";
   const textColour = props.status == MessageStatus.RECEIVED ? "text-white" : "";
 
   return (

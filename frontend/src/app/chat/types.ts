@@ -1,19 +1,23 @@
 export enum MessageStatus {
-    SENDING,
-    SENT,
-    RECEIVED
+  SENDING,
+  SENT,
+  RECEIVED,
+}
+export enum UserStatus {
+  ONLINE="Online",
+  OFFLINE="Offline",
 }
 export interface Message {
-    timestamp: number
-    status: MessageStatus
-    content: string
-    id: number
+  timestamp: number;
+  status: MessageStatus;
+  content: string;
+  id: number;
 }
 export interface User {
-    firstName: string
-    lastName: string
-    icon: string
-    status: string
-    id: number
-    isNew: boolean
+  firstName: string;
+  lastName: string;
+  icon: string;
+  status: UserStatus;
+  id: number;
+  isNew: boolean;
 }

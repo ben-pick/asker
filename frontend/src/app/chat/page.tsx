@@ -4,15 +4,17 @@ import { useEffect, useState } from "react";
 import Chat from "./chat";
 import UserBar from "./userBar";
 import { Separator } from "@/components/ui/separator";
-import { ws } from "@/app/ws";
+import { socket } from "@/app/ws";
+import { useRouter } from "next/navigation";
 
-import { MessageStatus, User } from "./types";
+import { MessageStatus, User, UserStatus } from "./types";
+import useSocket from "@/hooks/use-socket";
 const users = [
   {
     firstName: "Ben",
     lastName: "Smith",
     icon: "https://i.pravatar.cc/64",
-    status: "Online",
+    status: UserStatus.OFFLINE,
     id: 1,
     isNew: false,
   },
@@ -20,7 +22,7 @@ const users = [
     firstName: "Georgia",
     lastName: "Ramesh",
     icon: "https://i.pravatar.cc/64",
-    status: "Online",
+    status: UserStatus.ONLINE,
     id: 2,
     isNew: true,
   },
@@ -56,16 +58,13 @@ userToMessages.set(2, [
 ]);
 
 export default function Page() {
+  const router = useRouter();
+  const { data, isConnected } = useSocket(socket, "users");
   const [selectedUser, setSelectedUser] = useState(users[0]);
   const currMessages = userToMessages.get(selectedUser.id);
   const onUserChange = (newUser: User) => {
     setSelectedUser(newUser);
   };
-  useEffect(() => {
-    ws.on("connect", () => {
-      console.log("here");
-    });
-  });
   return (
     <div className="flex items-center justify-center h-full">
       <Card className="h-5/6 w-5/6">
